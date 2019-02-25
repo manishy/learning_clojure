@@ -40,7 +40,7 @@
 
 (def is-equal-to-two? (partial = 2))
 
-(def possible-factors-of (comp rest (partial range) inc))
+(def possible-factors (comp rest (partial range) inc))
 
 (def is-divisible(comp zero? (partial apply rem)))
 
@@ -56,7 +56,7 @@
                 is-equal-to-two?
                 count
                 filter-actual-factors
-                possible-factors-of))
+                possible-factors))             ; Have to handle is-prime? for Zero 
 
 (is-prime? 2)
 (is-prime? 2)
@@ -67,3 +67,27 @@
 (is-prime? 13)
 (is-prime? 17)
 (is-prime? 19)
+(is-prime? 1)
+; (is-prime? 0)          ; have to handle this case
+; (is-prime? -1)
+
+
+
+; nth-prime  ------------------------------
+
+(def infinite-prime-series ( partial filter is-prime? (rest (range))))
+
+(def n-prime-series #(take %1 (infinite-prime-series)))
+
+(def nth-prime (comp last n-prime-series))
+
+(nth-prime 100)
+(nth-prime 1)
+(nth-prime 2)
+(nth-prime 5)
+(nth-prime 6)
+
+
+
+; sub-set of  -------------------------------
+
