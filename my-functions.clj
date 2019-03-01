@@ -87,7 +87,21 @@
 (nth-prime 5)
 (nth-prime 6)
 
+; sub-sets-of  -------------------------------
 
 
-; sub-set of  -------------------------------
+; input [1 2 3]
+; output [[] [1] [2] [3] [1 2] [2 3] [3 1] [1 2 3]]
 
+
+(defn reducer [accumulator element]
+  (concat accumulator (map (partial cons element) accumulator))
+  )
+
+; (defn sub-sets-of [coll]
+;   (reduce reducer [[]] coll)
+;   )
+
+(def sub-sets-of ( partial reduce reducer [[]]))
+
+(sub-sets-of [3 2 1])
